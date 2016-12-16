@@ -1,0 +1,26 @@
+$ git clone /home/testuser/mycode
+
+
+$ sudo chown -R testuser /home/testuser/mycode 
+
+$ tar -zcvf mycode.tar.gz /home/testuser/mycode
+
+$tar -cvpf mycode.tar.gz /home/testuser/mycode/ | xargs -I '{}' sh -c "test -f '{}' && 
+  md5sum '{}'" | ssh remote "( cd /home/testuser/remotecode/ ; cat > mycode.tar.gz
+
+$ /sbin/init.d/node stop
+$ mv  /home/testuser/mycode/mycode.tar.gz   /user/node/data/
+$ tar -zxvf mycode.tar.gz
+$ /sbin/init.d/node start
+
+
+
+
+// tar -cvpf mycode.tar.gz /home/testuser/mycode/| xargs -I '{}' sh -c "test -f '{}' && 
+  md5sum '{}'" | tee mycode.md5
+
+tar czf - . | ssh remote "( cd /somewhere ; cat > file.tar.gz )"
+
+response=$(curl --write-out %{http_code} --silent --output /dev/null servername)
+
+curl -sL -w "%{http_code}\\n" "http://remote.test.com/status" -o /dev/null
